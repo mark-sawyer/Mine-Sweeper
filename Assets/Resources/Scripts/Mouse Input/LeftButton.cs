@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,19 +33,27 @@ public class LeftButton : TileClickHandlerGetter {
         active = false;
         TileClickHandler tileEventHandler = getTileEventHandler();
         if (tileEventHandler == currentTileClickHandler) {
-            currentTileClickHandler.leftReleased();
+            if (currentTileClickHandler != null) {
+                currentTileClickHandler.leftReleased();
+            }
         }
         else {
-            currentTileClickHandler.leftHoldRemoved();
+            if (currentTileClickHandler != null) {
+                currentTileClickHandler.leftHoldRemoved();
+            }
         }
     }
 
     private void handleHold() {
         TileClickHandler tileEventHandler = getTileEventHandler();
         if (tileEventHandler != currentTileClickHandler) {
-            currentTileClickHandler.leftHoldRemoved();
+            if (currentTileClickHandler != null) {
+                currentTileClickHandler.leftHoldRemoved();
+            }
             currentTileClickHandler = tileEventHandler;
-            currentTileClickHandler.leftHold();
+            if (currentTileClickHandler != null) {
+                currentTileClickHandler.leftHold();
+            }
         }
     }
 }
